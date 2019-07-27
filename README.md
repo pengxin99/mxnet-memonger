@@ -44,3 +44,48 @@ sym._set_attr(force_mirroring='True')
 
 mxnet-memonger actually use the same way to do memory planning. You can simply write your own memory
 allocator by setting the force_mirroring attribute in a smart way.
+
+# Test the speed w/o Memory Optimizer
+
+some fused things about this data, in theroy, speed is init > old and init > new, but result is not.
+the memory cost is not match with the GPU memory by comman `nvidia-smi`.
+
+```python
+epoch 0, training ('accuracy', 0.0)
+epoch 1, training ('accuracy', 0.0)
+epoch 2, training ('accuracy', 0.0)
+epoch 3, training ('accuracy', 0.0)
+epoch 4, training ('accuracy', 0.0)
+epoch 5, training ('accuracy', 0.0)
+epoch 6, training ('accuracy', 0.0)
+epoch 7, training ('accuracy', 0.0)
+epoch 8, training ('accuracy', 0.0)
+epoch 9, training ('accuracy', 0.0)
+init feature map cost=6491 MB
+init speed is : 30.664243 img/s
+epoch 0, training ('accuracy', 0.0)
+epoch 1, training ('accuracy', 0.0)
+epoch 2, training ('accuracy', 0.0)
+epoch 3, training ('accuracy', 0.0)
+epoch 4, training ('accuracy', 0.0)
+epoch 5, training ('accuracy', 0.0)
+epoch 6, training ('accuracy', 0.0)
+epoch 7, training ('accuracy', 0.0)
+epoch 8, training ('accuracy', 0.0)
+epoch 9, training ('accuracy', 0.0)
+Old feature map cost=6491 MB
+old speed is : 41.904341 img/s
+epoch 0, training ('accuracy', 0.0)
+epoch 1, training ('accuracy', 0.0)
+epoch 2, training ('accuracy', 0.0)
+epoch 3, training ('accuracy', 0.0)
+epoch 4, training ('accuracy', 0.0)
+epoch 5, training ('accuracy', 0.0)
+epoch 6, training ('accuracy', 0.0)
+epoch 7, training ('accuracy', 0.0)
+epoch 8, training ('accuracy', 0.0)
+epoch 9, training ('accuracy', 0.0)
+New feature map cost=1514 MB
+new speed is : 31.351915 img/s
+
+```
